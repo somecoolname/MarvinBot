@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvinBot", "MarvinBot\MarvinBot.csproj", "{ABD2B3CA-FD40-42FD-8AC8-EF254F610BF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlackService", "SlackService\SlackService.csproj", "{4F5C749A-F2E0-4D17-B7B4-CAA8926503DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ABD2B3CA-FD40-42FD-8AC8-EF254F610BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABD2B3CA-FD40-42FD-8AC8-EF254F610BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABD2B3CA-FD40-42FD-8AC8-EF254F610BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F5C749A-F2E0-4D17-B7B4-CAA8926503DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F5C749A-F2E0-4D17-B7B4-CAA8926503DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F5C749A-F2E0-4D17-B7B4-CAA8926503DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F5C749A-F2E0-4D17-B7B4-CAA8926503DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
