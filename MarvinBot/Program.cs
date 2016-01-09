@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Net;
 using Newtonsoft.Json;
 using SlackService.Events;
 using SlackService.Models;
 using WebSocket4Net;
+using static System.Console;
 
 namespace MarvinBot
 {
@@ -16,7 +13,11 @@ namespace MarvinBot
         private static WebSocket webSocket;
         static void Main(string[] args)
         {
-            webSocket = new WebSocket("wss://ms396.slack-msgs.com/websocket/A31AfioHwVsSy-1WQrh3Vyy1Xbs6jLv9PTh1CKbgEXuFTJvKYJ6TbmoYH7NpepghfwYKislLy6Am7pHIdOb674T24JPN70aQxxvhAoxWWLcP1Mbs0UmlBYnRb-f-OAUT91Z_fZAa47X8kbhh8IZpLg==");
+            WriteLine("Getting WebSocket connection String.");
+            var connectionString = GetWebSocketConnectionString();
+
+            WriteLine("Connecting to WebSocket Url");
+            webSocket = new WebSocket(connectionString);
             webSocket.Open();
             webSocket.MessageReceived += WebSocket_MessageReceived;
 
@@ -27,14 +28,31 @@ namespace MarvinBot
             }
         }
 
+        private static string GetWebSocketConnectionString()
+        {
+            string response;
+            using (var webClient = new WebClient())
+            {
+                //uses the marvin bot apikey
+                response =
+                    webClient.DownloadString("https://slack.com/api/rtm.start?token=xoxb-18091593092-Zfbf6UOoVNAsT0FrXLu259eG");
+            }
+
+            var rtmStartResponse = JsonConvert.DeserializeObject<RtmStartResponse>(response);
+            return rtmStartResponse.url;
+        }
+
         private static void WebSocket_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
-            Console.WriteLine(e.Message);
             var baseEvent = JsonConvert.DeserializeObject<BaseEvent>(e.Message);
+            WriteLine($"Message received of type {baseEvent.Type}");
 
             if (baseEvent.Type == "message")
             {
                 var messageEvent = JsonConvert.DeserializeObject<MessageEvent>(e.Message);
+
+                WriteLine(messageEvent.Text);
+
                 var messageCommand = new MessageCommand
                 {
                     channel = messageEvent.Channel,
@@ -44,7 +62,6 @@ namespace MarvinBot
                 webSocket.Send(JsonConvert.SerializeObject(messageCommand));
             }
 
-            //xoxb-18092234309-nDkSjH0vcTRvT7ikoszyIIj3
         }
     }
 }
