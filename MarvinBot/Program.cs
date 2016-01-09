@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SlackService.Events;
 using SlackService.Models;
 using WebSocket4Net;
 

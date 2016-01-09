@@ -1,4 +1,4 @@
-﻿namespace SlackService.Models
+﻿namespace SlackService.Events
 {
     public class MessageEvent : BaseEvent
     {

@@ -1,8 +1,8 @@
-﻿namespace SlackService.Models
+﻿namespace SlackService.Events
 {
     public class BaseEvent
     {
-         public string Type { get; set; }
+        public string Type { get; set; }
         public string Channel { get; set; }
         public string SubType { get; set; }
     }
